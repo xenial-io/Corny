@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.ComponentModel;
-
 using Xenial.Delicious.Corny.Drawing;
 
 namespace Xenial.Delicious.Corny
