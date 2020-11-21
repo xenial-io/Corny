@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Compile Remove="ControlTests.cs" />
-    <Compile Remove="RadioGroupTests.cs" />
   </ItemGroup>
 
   <ItemGroup>

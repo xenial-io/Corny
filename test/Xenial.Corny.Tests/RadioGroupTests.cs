@@ -1,16 +1,21 @@
 ﻿using System;
 
+using Cornichon;
+
 using Shouldly;
+
+using Xenial.Delicious.Corny.Tests.TestableControls;
+
+using static Xenial.Tasty;
 
 namespace Xenial.Delicious.Corny.Tests
 {
-    public class RadioGroupTests
+    public static class RadioGroupFacts
     {
-        [Scenario]
-        public void UpArrowScenario(RadioGroup radioGroup)
+        public static void RadioGroupTests() => Describe(nameof(RadioGroup), () =>
         {
-            "Given i have a RadioGroup with 3 Elements"
-                .x(() => radioGroup = new TestableRadioGroup
+            RadioGroup CreateRadioGroup()
+                => new TestableRadioGroup
                 {
                     Options =
                     {
@@ -18,89 +23,53 @@ namespace Xenial.Delicious.Corny.Tests
                         "Option2",
                         "Option3",
                     }
-                });
+                };
 
-            "The selected index should be 0"
-                .x(() => radioGroup.SelectedIndex.ShouldBe(0));
+            void Keypress(RadioGroup radioGroup, ConsoleKey direction, char @char = ' ')
+               => ((ISupportKeyPress)radioGroup).OnKeyPress(new KeyPressEventArgs(new ConsoleKeyInfo(@char, direction, false, false, false)));
 
-            "When i press the up key"
-                .x(() => ((ISupportKeyPress)radioGroup).OnKeyPress(new KeyPressEventArgs(new ConsoleKeyInfo(' ', ConsoleKey.UpArrow, false, false, false))));
-
-            "The selected index should be still 0"
-                .x(() => radioGroup.SelectedIndex.ShouldBe(0));
-        }
-
-        [Scenario]
-        public void DownArrowScenario(RadioGroup radioGroup)
-        {
-            "Given i have a RadioGroup with 3 Elements"
-                .x(() => radioGroup = new TestableRadioGroup
+            Describe("Keyboard navigtation", () =>
+            {
+                It("up arrow", () =>
                 {
-                    Options =
-                    {
-                        "Option1",
-                        "Option2",
-                        "Option3",
-                    }
+                    var radioGroup = CreateRadioGroup();
+                    Scenario
+                        .Given(() => radioGroup.SelectedIndex.ShouldBe(0))
+                        .And(() => Keypress(radioGroup, ConsoleKey.UpArrow))
+                        .Then(() => radioGroup.SelectedIndex.ShouldBe(0));
                 });
 
-            "The selected index should be 0"
-                .x(() => radioGroup.SelectedIndex.ShouldBe(0));
-
-            "When i press the down key"
-                .x(() => ((ISupportKeyPress)radioGroup).OnKeyPress(new KeyPressEventArgs(new ConsoleKeyInfo(' ', ConsoleKey.DownArrow, false, false, false))));
-
-            "The selected index should be still 1"
-                .x(() => radioGroup.SelectedIndex.ShouldBe(1));
-
-            "When i press the down key again"
-                .x(() => ((ISupportKeyPress)radioGroup).OnKeyPress(new KeyPressEventArgs(new ConsoleKeyInfo(' ', ConsoleKey.DownArrow, false, false, false))));
-
-            "The selected index should be 2"
-                .x(() => radioGroup.SelectedIndex.ShouldBe(2));
-
-            "When i press the down key again"
-                .x(() => ((ISupportKeyPress)radioGroup).OnKeyPress(new KeyPressEventArgs(new ConsoleKeyInfo(' ', ConsoleKey.DownArrow, false, false, false))));
-
-            "The selected index should be still 2"
-                .x(() => radioGroup.SelectedIndex.ShouldBe(2));
-        }
-
-        [Scenario]
-        public void SelectTheSecondOptionScenario(RadioGroup radioGroup)
-        {
-            "Given i have a RadioGroup with 3 Elements"
-                .x(() => radioGroup = new TestableRadioGroup
+                It("down arrow", () =>
                 {
-                    Options =
-                    {
-                        "Option1",
-                        "Option2",
-                        "Option3",
-                    }
+                    var radioGroup = CreateRadioGroup();
+                    Scenario
+                        .Given(() => radioGroup.SelectedIndex.ShouldBe(0))
+                        .And(() => Keypress(radioGroup, ConsoleKey.DownArrow))
+                        .Then(() => radioGroup.SelectedIndex.ShouldBe(1))
+                        .And(() => Keypress(radioGroup, ConsoleKey.DownArrow))
+                        .Then(() => radioGroup.SelectedIndex.ShouldBe(2))
+                        .And(() => Keypress(radioGroup, ConsoleKey.DownArrow))
+                        .Then(() => radioGroup.SelectedIndex.ShouldBe(2))
+                    ;
                 });
+            });
 
-            "The selected index should be 0"
-                .x(() => radioGroup.SelectedIndex.ShouldBe(0));
-
-            "The Checked Options null"
-                .x(() => radioGroup.Checked.ShouldBe(null));
-
-            "When i press the down key"
-                .x(() => ((ISupportKeyPress)radioGroup).OnKeyPress(new KeyPressEventArgs(new ConsoleKeyInfo(' ', ConsoleKey.DownArrow, false, false, false))));
-
-            "The selected index should be 1"
-                .x(() => radioGroup.SelectedIndex.ShouldBe(1));
-
-            "The Checked Options is still null"
-                .x(() => radioGroup.Checked.ShouldBe(null));
-
-            "When i press the space key"
-                .x(() => ((ISupportKeyPress)radioGroup).OnKeyPress(new KeyPressEventArgs(new ConsoleKeyInfo(' ', ConsoleKey.Spacebar, false, false, false))));
-
-            "The Checked Options is Option2"
-                .x(() => radioGroup.Checked.ShouldBe("Option2"));
-        }
-
+            Describe("Selection", () =>
+            {
+                It("should work", () =>
+                {
+                    var radioGroup = CreateRadioGroup();
+                    Scenario
+                        .Given(() => radioGroup.SelectedIndex.ShouldBe(0))
+                        .Then(() => radioGroup.Checked.ShouldBeNull())
+                        .And(() => Keypress(radioGroup, ConsoleKey.DownArrow))
+                        .Then(() => radioGroup.SelectedIndex.ShouldBe(1))
+                        .Then(() => radioGroup.Checked.ShouldBeNull())
+                        .And(() => Keypress(radioGroup, ConsoleKey.Spacebar))
+                        .Then(() => radioGroup.Checked.ShouldBe("Option2"))
+                    ;
+                });
+            });
+        });
     }
 }
