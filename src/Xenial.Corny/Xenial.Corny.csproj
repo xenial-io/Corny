@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <RootNamespace>Xenial.Delicious</RootNamespace>
+    <PackageId>Xenial.Corny</PackageId>
+    <PackageDescription>Corny - Delicious dotnet console</PackageDescription>
+  </PropertyGroup>
+
+</Project>
