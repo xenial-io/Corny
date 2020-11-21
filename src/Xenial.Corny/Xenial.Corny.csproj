@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <RootNamespace>Xenial.Delicious</RootNamespace>
+    <RootNamespace>Xenial.Delicious.Corny</RootNamespace>
     <PackageId>Xenial.Corny</PackageId>
     <PackageDescription>Corny - Delicious dotnet console</PackageDescription>
   </PropertyGroup>
