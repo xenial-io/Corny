@@ -1,12 +1,6 @@
-﻿using System;
+﻿using static Xenial.Delicious.Corny.Tests.CheckboxFacts;
+using static Xenial.Tasty;
 
-namespace Xenial.Corny.Tests
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
-    }
-}
+CheckboxTests();
+
+await Run(args);
