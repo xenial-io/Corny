@@ -473,20 +473,29 @@ namespace Xenial.Delicious.Corny
         {
             bool IsCursorVisible()
             {
+#if FULL_FRAMEWORK
+                return Console.CursorVisible;
+#else
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     return Console.CursorVisible;
                 }
                 return true;
+#endif
             }
 
             void SetCursorVisible(bool cursorVisible)
             {
+#if FULL_FRAMEWORK
+                Console.CursorVisible = cursorVisible;
+                Console.CursorSize = cursorVisible ? 100 : 1;
+#else
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     Console.CursorVisible = cursorVisible;
                     Console.CursorSize = cursorVisible ? 100 : 1;
                 }
+#endif
             }
 
             lock (locker)
