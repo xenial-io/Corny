@@ -471,37 +471,10 @@ namespace Xenial.Delicious.Corny
 
         public void Render()
         {
-            bool IsCursorVisible()
-            {
-#if FULL_FRAMEWORK
-                return Console.CursorVisible;
-#else
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    return Console.CursorVisible;
-                }
-                return true;
-#endif
-            }
-
-            void SetCursorVisible(bool cursorVisible)
-            {
-#if FULL_FRAMEWORK
-                Console.CursorVisible = cursorVisible;
-                Console.CursorSize = cursorVisible ? 100 : 1;
-#else
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    Console.CursorVisible = cursorVisible;
-                    Console.CursorSize = cursorVisible ? 100 : 1;
-                }
-#endif
-            }
-
             lock (locker)
             {
-                var cursorVisible = IsCursorVisible();
-                SetCursorVisible(false);
+                var cursorVisible = this.IsCursorVisible();
+                this.SetCursorVisible(false);
 
                 consoleLocation = new Point(Console.CursorLeft, Console.CursorTop);
                 foreColor = Console.ForegroundColor;
@@ -543,7 +516,7 @@ namespace Xenial.Delicious.Corny
 
                     Console.SetCursorPosition(consoleLocation.X, consoleLocation.Y);
 
-                    SetCursorVisible(cursorVisible);
+                    this.SetCursorVisible(cursorVisible);
                 }
             }
         }

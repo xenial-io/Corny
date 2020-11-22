@@ -70,7 +70,8 @@ namespace Xenial.Delicious.Corny
             }
         }
 
-        protected virtual void OnFocusedChanged() => Console.CursorVisible = true;
+        protected virtual void OnFocusedChanged()
+            => this.SetCursorVisible(true);
 
         bool IControl.SupportsFocus => false;
 
@@ -78,7 +79,7 @@ namespace Xenial.Delicious.Corny
 
         protected virtual void SetCursorPosition(Point location)
         {
-            Console.CursorVisible = true;
+            this.SetCursorVisible(true);
             Console.SetCursorPosition(location.X, location.Y);
         }
 

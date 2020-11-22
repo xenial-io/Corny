@@ -164,7 +164,7 @@ namespace Xenial.Delicious.Corny
 
         protected override void OnFocusedChanged()
         {
-            Console.CursorVisible = false;
+            this.SetCursorVisible(false);
             Render();
         }
     }
