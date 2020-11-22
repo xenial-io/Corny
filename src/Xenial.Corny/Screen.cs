@@ -475,6 +475,7 @@ namespace Xenial.Delicious.Corny
                 var cursorVisible = Console.CursorVisible;
 
                 Console.CursorVisible = false;
+                Console.CursorSize = 0;
 
                 consoleLocation = new Point(Console.CursorLeft, Console.CursorTop);
                 foreColor = Console.ForegroundColor;
@@ -517,6 +518,7 @@ namespace Xenial.Delicious.Corny
                     Console.SetCursorPosition(consoleLocation.X, consoleLocation.Y);
 
                     Console.CursorVisible = cursorVisible;
+                    Console.CursorSize = 100;
                 }
             }
         }

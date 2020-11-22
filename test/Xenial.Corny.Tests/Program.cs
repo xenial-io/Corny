@@ -1,10 +1,24 @@
-﻿using static Xenial.Delicious.Corny.Tests.CheckboxFacts;
+﻿using System.Threading.Tasks;
+
+using static Xenial.Delicious.Corny.Tests.ControlFacts;
+using static Xenial.Delicious.Corny.Tests.CheckboxFacts;
 using static Xenial.Delicious.Corny.Tests.RadioGroupFacts;
 using static Xenial.Delicious.Corny.Tests.TextboxFacts;
 using static Xenial.Tasty;
 
-CheckboxTests();
-TextboxTests();
-RadioGroupTests();
+namespace Xenial.Delicious.Corny.Tests
+{
+    public static class Program
+    {
+        public static async Task<int> Main(string[] args)
+        {
+            ControlTests();
+            CheckboxTests();
+            TextboxTests();
+            RadioGroupTests();
 
-await Run(args);
+            return await Run(args);
+        }
+    }
+}
+
