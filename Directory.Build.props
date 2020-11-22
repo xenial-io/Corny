@@ -8,7 +8,7 @@
     <Authors>Xenial, Manuel Grundner</Authors>
     <FullFrameworkVersion>net462</FullFrameworkVersion>
     <NetStandardVersion>netstandard2.0</NetStandardVersion>
-    <NetCoreVersion>netcoreapp3.1</NetCoreVersion>
+    <NetCoreVersion>net5</NetCoreVersion>
     <TargetFrameworks>$(NetStandardVersion);$(FullFrameworkVersion)</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PackageOutputPath>$(MSBuildThisFileDirectory)artifacts\nuget</PackageOutputPath>
