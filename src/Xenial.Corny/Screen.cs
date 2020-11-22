@@ -6,6 +6,7 @@ using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Threading;
 
@@ -470,12 +471,28 @@ namespace Xenial.Delicious.Corny
 
         public void Render()
         {
+            bool IsCursorVisible()
+            {
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    return Console.CursorVisible;
+                }
+                return true;
+            }
+
+            void SetCursorVisible(bool cursorVisible)
+            {
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    Console.CursorVisible = cursorVisible;
+                    Console.CursorSize = cursorVisible ? 100 : 1;
+                }
+            }
+
             lock (locker)
             {
-                var cursorVisible = Console.CursorVisible;
-
-                Console.CursorVisible = false;
-                Console.CursorSize = 0;
+                var cursorVisible = IsCursorVisible();
+                SetCursorVisible(false);
 
                 consoleLocation = new Point(Console.CursorLeft, Console.CursorTop);
                 foreColor = Console.ForegroundColor;
@@ -517,8 +534,7 @@ namespace Xenial.Delicious.Corny
 
                     Console.SetCursorPosition(consoleLocation.X, consoleLocation.Y);
 
-                    Console.CursorVisible = cursorVisible;
-                    Console.CursorSize = 100;
+                    SetCursorVisible(cursorVisible);
                 }
             }
         }
