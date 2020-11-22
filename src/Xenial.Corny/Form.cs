@@ -75,12 +75,12 @@ namespace Xenial.Delicious.Corny
             controls.CollectionChanged += Controls_CollectionChanged;
         }
 
-        private void Controls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Controls_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             controls.CollectionChanged -= Controls_CollectionChanged;
             try
             {
-                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+                if (e.NewItems != null && e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
                 {
                     foreach (var control in e.NewItems.OfType<IControl>())
                     {
@@ -88,7 +88,7 @@ namespace Xenial.Delicious.Corny
                     }
                 }
 
-                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+                if (e.OldItems != null && e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
                 {
                     foreach (var control in e.OldItems.OfType<IControl>())
                     {

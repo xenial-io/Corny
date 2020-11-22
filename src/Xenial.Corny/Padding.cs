@@ -126,7 +126,7 @@ namespace Xenial.Delicious.Corny
         [Browsable(false)]
         public Size Size => new Size(Horizontal, Vertical);
 
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             if (other is Padding)
             {

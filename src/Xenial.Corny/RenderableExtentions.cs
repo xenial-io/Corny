@@ -20,16 +20,19 @@ namespace Xenial.Delicious.Corny
 
         public static void SetCursorVisible(this IRenderable renderable, bool cursorVisible)
         {
-#if FULL_FRAMEWORK
-            Console.CursorVisible = cursorVisible;
-            Console.CursorSize = cursorVisible ? 100 : 1;
-#else
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (!Console.IsOutputRedirected)
             {
+#if FULL_FRAMEWORK
                 Console.CursorVisible = cursorVisible;
                 Console.CursorSize = cursorVisible ? 100 : 1;
-            }
+#else
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    Console.CursorVisible = cursorVisible;
+                    Console.CursorSize = cursorVisible ? 100 : 1;
+                }
 #endif
+            }
         }
     }
 }

@@ -9,7 +9,7 @@
     <FullFrameworkVersion>net462</FullFrameworkVersion>
     <NetStandardVersion>netstandard2.0</NetStandardVersion>
     <NetCoreVersion>net5</NetCoreVersion>
-    <TargetFrameworks>$(NetStandardVersion);$(FullFrameworkVersion)</TargetFrameworks>
+    <TargetFrameworks>$(NetStandardVersion);$(FullFrameworkVersion);$(NetCoreVersion)</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PackageOutputPath>$(MSBuildThisFileDirectory)artifacts\nuget</PackageOutputPath>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
