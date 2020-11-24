@@ -4,9 +4,9 @@ using Xenial.Delicious.Corny;
 
 namespace Xenial.Corny.LoginScreenDemo
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        internal static void Main(string[] _)
         {
             var txt1 = new Textbox
             {
